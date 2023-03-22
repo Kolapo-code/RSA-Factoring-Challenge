@@ -1,4 +1,12 @@
-6
-77
-239821585064027
-2497885147362973
+from sympy import isprime, nextprime, prevprime
+import sys
+
+def factorize(n):
+	if not isprime(n):
+		raise ValueError('n must be a prime number')
+
+		p = nextprime(int(n**(1/2)))
+	while p < n:
+	q = n // p
+	if p * q == n and isprime(q):
+		return 'p={}, q={}'.format(p, q)
