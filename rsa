@@ -4,28 +4,28 @@ import math
 import sys
 
 def is_prime(n):
-    if n < 2:
-        return False
-    for i in range(2, int(math.sqrt(n)) + 1):
-        if n % i == 0:
-            return False
-    return True
+if n < 2:
+	return False
+	for i in range(2, int(math.sqrt(n)) + 1):
+		if n % i == 0:
+			return False
+			return True
 
-def factorize(n):
-    if is_prime(n):
-        return '{}={}*{}'.format(n, n, 1)
-    for i in range(2, int(math.sqrt(n)) + 1):
-        if n % i == 0 and is_prime(i) and is_prime(n // i):
-            return '{}={}*{}'.format(n, i, n // i)
-    return '{} has no prime factors'.format(n)
+			def factorize(n):
+			if is_prime(n):
+				return '{}={}*{}'.format(n, n, 1)
+				for i in range(2, int(math.sqrt(n)) + 1):
+					if n % i == 0 and is_prime(i) and is_prime(n // i):
+						return '{}={}*{}'.format(n, i, n // i)
+						return '{} has no prime factors'.format(n)
 
-def main(filename):
-    with open(filename, 'r') as f:
-        n = int(f.readline().strip())
-        print(factorize(n))
+						def main(filename):
+						with open(filename, 'r') as f:
+						n = int(f.readline().strip())
+						print(factorize(n))
 
-if __name__ == '__main__':
-    if len(sys.argv) != 2:
-        print('Usage: prime_factors <file>')
-    else:
-        main(sys.argv[1])
+						if __name__ == '__main__':
+							if len(sys.argv) != 2:
+								print('Usage: prime_factors <file>')
+							else:
+								main(sys.argv[1])
