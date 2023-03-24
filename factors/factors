@@ -1,14 +1,20 @@
 #!/bin/bash
 
-import math
+import sys
 
 def factorize(n):
-	for i in range(2, int(math.sqrt(n)) + 1):
-		if n % i == 0:
-		return '{}={}*{}'.format(n, i, n // i)
-		return '{} is prime'.format(n)
+for i in range(2, n):
+	if n % i == 0:
+		return "{}={}*{}".format(n, i, n//i)
+		return "{} is prime".format(n)
 
-		with open('file.txt', 'r') as f:
-		for line in f:
-	n = int(line.strip())
-print(factorize(n))
+		if __name__ == '__main__':
+			if len(sys.argv) < 2:
+				print("Usage: factors <file>")
+				sys.exit(1)
+
+				input_file = sys.argv[1]
+				with open(input_file, 'r') as f:
+				for line in f:
+					n = int(line.strip())
+					print(factorize(n))
