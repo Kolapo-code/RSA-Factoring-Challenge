@@ -1,39 +1,14 @@
-#!/bin/bash
+#!/bin/bash							   
 
-import math
+from sympy import isprime, nextprime, prevprime
 import sys
-from random import randint
 
-def gcd(a, b):
-while b:
-	a, b = b, a % b
-	return a
+def factorize(n):
+if not isprime(n):
+	raise ValueError('n must be a prime number')
 
-	def pollard_rho(n):
-	x = y = 2
-	d = 1
-	while d == 1:
-		x = (x*x + 1) % n
-		y = (y*y + 1) % n
-		y = (y*y + 1) % n
-		d = gcd(abs(x - y), n)
-		if d == n:
-			return None
-		else:
-			return d
-
-			def factorize(n):
-			p = pollard_rho(n)
-			q = n // p
-			return '{}={}*{}'.format(n, p, q)
-
-			def main(filename):
-			with open(filename, 'r') as f:
-			n = int(f.readline().strip())
-			print(factorize(n))
-
-			if __name__ == '__main__':
-				if len(sys.argv) != 2:
-					print('Usage: rsa_factors <file>')
-				else:
-					main(sys.argv[1])
+	p = nextprime(int(n**(1/2)))
+	while p < n:
+		q = n // p
+		if p * q == n and isprime(q):
+			return 'p={}, q={}'.format(p, q)
