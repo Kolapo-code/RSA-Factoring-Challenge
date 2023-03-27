@@ -1,15 +1,32 @@
 #!/usr/bin/python3
-							   
-							   
-from sympy import isprime, nextprime, prevprime
+
+
+import math
 import sys
 
-def factorize(n):
-    if not isprime(n):
-        raise ValueError('n must be a prime number')
+def is_prime(n):
+    if n < 2:
+        return False
+    for i in range(2, int(math.sqrt(n)) + 1):
+        if n % i == 0:
+            return False
+    return True
 
-    p = nextprime(int(n**(1/2)))
-    while p < n:
-        q = n // p
-        if p * q == n and isprime(q):
-            return 'p={}, q={}'.format(p, q)
+def factorize(n):
+    if is_prime(n):
+        return '{}={}*{}'.format(n, n, 1)
+    for i in range(2, int(math.sqrt(n)) + 1):
+        if n % i == 0 and is_prime(i) and is_prime(n // i):
+            return '{}={}*{}'.format(n, i, n // i)
+    return '{} has no prime factors'.format(n)
+
+def main(filename):
+    with open(filename, 'r') as f:
+        n = int(f.readline().strip())
+        print(factorize(n))
+
+if __name__ == '__main__':
+    if len(sys.argv) != 2:
+        print('Usage: prime_factors <file>')
+    else:
+        main(sys.argv[1])
